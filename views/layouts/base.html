@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <!-- <link rel="shortcut icon" href="/favicon.ico"> -->
+    <title>My-test</title>
+
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="Flat-UI/css/flat-ui.min.css">
+    <link rel="stylesheet" href="css/vendor/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="css/vendor/swiper.min.css"> -->
+    <link rel="stylesheet" href="css/vendor/buttons.css">
+    <link rel="stylesheet" href="css/base.css">
+
+    {% block css %}{% endblock %}
+</head>
+
+<body>
+    {% include 'layouts/top-navbar.html'%}
+    {% block content %} {% endblock %} 
+    {% include 'layouts/bottom-navbar.html'%}
+
+    <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="js/vendor/swiper.min.js"></script> -->
+    <!-- <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script> -->
+    <script type="text/javascript" src="Flat-UI/js/flat-ui.min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery.pin.min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery.smoove.min.js"></script>
+    <script type="text/javascript" src="js/vendor/vue.js"></script>
+    <script type="text/javascript" src="js/vendor/echarts.js"></script>
+    <script type="text/javascript" src="js/vendor/echarts-wordcloud.js"></script>
+    <script type="text/javascript" src="js/base.js"></script>
+    {% block js %}{% endblock %}
+</body>
+
+</html>
