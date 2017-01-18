@@ -1,7 +1,13 @@
+'use strict';
+
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const views = require('koa-views');
 const serve = require('koa-static');
+const session = require('koa-generic-session');
+const convert = require('koa-convert');
+const passport = require('koa-passport');
+const CSRF = require('koa-csrf').default;
 const nunjucks = require('nunjucks');
 const controller = require('./controller');
 const mysql = require('mysql');
@@ -24,6 +30,24 @@ app.use(views(__dirname + '/views', {
 }));
 
 app.use(serve(__dirname + '/static'));
+
+app.use(bodyParser());
+
+app.keys = ['secret'];
+app.use(convert(session()));
+
+app.use(new CSRF({
+  invalidSessionSecretMessage: 'Invalid session secret',
+  invalidSessionSecretStatusCode: 403,
+  invalidTokenMessage: 'Invalid CSRF token',
+  invalidTokenStatusCode: 403,
+  excludedMethods: [ 'GET', 'HEAD', 'OPTIONS' ],
+  disableQuery: false
+}));
+
+require('./auth');
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(controller());
 

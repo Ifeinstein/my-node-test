@@ -3,21 +3,24 @@ const fs = require('fs');
 function addMapping(router, mapping) {
     for (var url in mapping) {
         switch (true) {
-            case url.startsWith('GET'):
+            case url.startsWith('GET')||url.startsWith('get'):
                 {
                     var path = url.substring(4);
                     router.get(path, mapping[url]);
+                    console.log(`register URL mapping: GET ${path}`);
                     break;
                 }
-            case url.startsWith('POST'):
+            case url.startsWith('POST')||url.startsWith('post'):
                 {
                     var path = url.substring(5);
-                    router.get(path, mapping[url]);
-                    break
+                    router.post(path, mapping[url]);
+                    console.log(`register URL mapping: POST ${path}`);
+                    break;
                 }
             default:
                 {
-                    ctx.render('error/404.html', {})
+                    console.log(`invalid URL: ${url}`);
+                    throw(404);
                 }
         }
     }

@@ -3,57 +3,62 @@ var auth = new Vue({
     data: {
         phone: '',
         code: '',
+        email: '',
         password: '',
         password_retype: '',
-        error_msg: ''
+        error_msg: ''||error_msg,
     },
     methods: {
-        get_code: function (e) {
-            var myreg = /^(1[3578]\d{9})$/;
-            if (!myreg.test(this.phone)) {
-                this.error_msg = 'please input right phone number'
-            } else {
-                $(e.target).attr('disabled', 'disabled');
-                $.get('/auth/send-message', {phone: this.phone}, function (data) {
-                    if (data.error) {
-                        login.error_msg = data.msg;
-                    } else {
-                        $('#phone').attr('readonly', 'readonly');
-                    }
-                });
-                var i = 61;
-                timer();
+        // get_code: function (e) {
+        //     var myreg = /^(1[3578]\d{9})$/;
+        //     if (!myreg.test(this.phone)) {
+        //         this.error_msg = 'please input right phone number'
+        //     } else {
+        //         $(e.target).attr('disabled', 'disabled');
+        //         $.get('/auth/send-message', {phone: this.phone}, function (data) {
+        //             if (data.error) {
+        //                 login.error_msg = data.msg;
+        //             } else {
+        //                 $('#phone').attr('readonly', 'readonly');
+        //             }
+        //         });
+        //         var i = 61;
+        //         timer();
 
-                function timer() {
-                    i--;
-                    $(e.target).text('resend after ' + i + 'sec');
-                    if (i == 0) {
-                        clearTimeout(timer);
-                        $(e.target).removeAttr("disabled");
-                        $(e.target).text('resend');
-                    } else {
-                        setTimeout(timer, 1000);
-                    }
-                }
-            }
-        },
+        //         function timer() {
+        //             i--;
+        //             $(e.target).text('resend after ' + i + 'sec');
+        //             if (i == 0) {
+        //                 clearTimeout(timer);
+        //                 $(e.target).removeAttr("disabled");
+        //                 $(e.target).text('resend');
+        //             } else {
+        //                 setTimeout(timer, 1000);
+        //             }
+        //         }
+        //     }
+        // },
         register: function () {
-            var myreg = /^(1[3578]\d{9})$/;
-            if (!myreg.test(this.phone)) {
-                this.error_msg = 'Please input right phone number'
-            } else if (this.password && (this.password != this.password_retype)) {
-                this.error_msg = 'Entered passwords differ!'
-            } else {
-                $('#form').submit();
-            }
+            // var myreg = /^(1[3578]\d{9})$/;
+            // if (!myreg.test(this.phone)) {
+            //     this.error_msg = 'Please input right phone number'
+            // } else if (this.password && (this.password != this.password_retype)) {
+            //     this.error_msg = 'Entered passwords differ!'
+            // } else {
+            //     $('#form').submit();
+            // }
+
+            $('form').submit();
         },
         login: function () {
-            var myreg = /^(1[3578]\d{9})$/;
-            if (!myreg.test(this.phone)) {
-                this.error_msg = 'Please input right phone number'
-            } else {
-                $('form').submit();
-            }
+            // var myreg = /^(1[3578]\d{9})$/;
+            // if (!myreg.test(this.phone)) {
+            //     this.error_msg = 'Please input right phone number'
+            // } else {
+            //     $('form').submit();
+            // }
+
+            $('form').submit();
         }
     }
 });

@@ -10,11 +10,12 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><b>Login</b></div>
                 <div class="panel-body">
-                    <form class="form-horizontal" @submit.prevent="login">
+                    <form class="form-horizontal" @submit.prevent="login" method="post" action="/login">
+                        <input type="hidden" name="_csrf" value="{{ csrf }}" />
                         <div class="form-group">
-                            <label for="phone" class="col-md-4 control-label">phone</label>
+                            <label for="email" class="col-md-4 control-label">email</label>
                             <div class="col-md-6">
-                                <input required id="phone" type="number" class="form-control" name="phone" placeholder="enter phone" v-model="phone">
+                                <input required id="email" type="test" class="form-control" name="email" placeholder="enter email" v-model="email">
                             </div>
                         </div>
                         <div class="form-group">
@@ -37,6 +38,7 @@
 </div>
 {% endblock %} {% block js %}
 <script>
+    var error_msg = '{{ error_msg }}';
 </script>
-<script type="text/javascript" src="/static/js/auth.js"></script>
+<script type="text/javascript" src="/js/auth.js"></script>
 {% endblock %}
