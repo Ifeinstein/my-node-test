@@ -4,16 +4,26 @@ const model = require('./model');
 let User = model.User;
 
 passport.serializeUser(function(user, done) {
-    done(null, user._id)
+    done(null, user.id)
 })
 
-passport.deserializeUser(function(id, done) {
-    User.findById(id, done);
+passport.deserializeUser(async function(id, done) {
+    try {
+        const user = await User.findOne({ where: { id: id } })
+        done(null, user)
+    } catch (err) {
+        done(err)
+    }
 })
 
 const LocalStrategy = require('passport-local').Strategy
-passport.use(new LocalStrategy(function(email, password, done) {
-    User.findOne({ email: email, password: password }, done);
+passport.use(new LocalStrategy(async function(username, password, done) {
+    let user = await User.findOne({ where: { email: username, password: password } })
+    if (user) {
+        done(null, user)
+    } else {
+        done(null, false)
+    }
 }))
 
 // const FacebookStrategy = require('passport-facebook').Strategy

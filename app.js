@@ -33,7 +33,7 @@ app.use(serve(__dirname + '/static'));
 
 app.use(bodyParser());
 
-app.keys = ['secret'];
+app.keys = ['secret111'];
 app.use(convert(session()));
 
 app.use(new CSRF({
@@ -52,4 +52,4 @@ app.use(passport.session());
 app.use(controller());
 
 app.listen(3000);
-console.log('app started at http://localhost:3000...');
+console.log('app started at http://localhost:3000');

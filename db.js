@@ -4,7 +4,7 @@ const uuid = require('node-uuid');
 
 const config = require('./db_config');
 
-console.log('init sequelize...');
+// console.log('init sequelize...');
 
 function generateId() {
     return uuid.v4();
@@ -37,28 +37,28 @@ function defineModel(name, attributes) {
         }
     };
 
-    console.log('model defined for table: ' + name + '\n' + JSON.stringify(attrs, function (k, v) {
-        if (k === 'type') {
-            for (let key in Sequelize) {
-                if (key === 'ABSTRACT' || key === 'NUMBER') {
-                    continue;
-                }
-                let dbType = Sequelize[key];
-                if (typeof dbType === 'function') {
-                    if (v instanceof dbType) {
-                        if (v._length) {
-                            return `${dbType.key}(${v._length})`;
-                        }
-                        return dbType.key;
-                    }
-                    if (v === dbType) {
-                        return dbType.key;
-                    }
-                }
-            }
-        }
-        return v;
-    }, '  '));
+    // console.log('model defined for table: ' + name + '\n' + JSON.stringify(attrs, function (k, v) {
+    //     if (k === 'type') {
+    //         for (let key in Sequelize) {
+    //             if (key === 'ABSTRACT' || key === 'NUMBER') {
+    //                 continue;
+    //             }
+    //             let dbType = Sequelize[key];
+    //             if (typeof dbType === 'function') {
+    //                 if (v instanceof dbType) {
+    //                     if (v._length) {
+    //                         return `${dbType.key}(${v._length})`;
+    //                     }
+    //                     return dbType.key;
+    //                 }
+    //                 if (v === dbType) {
+    //                     return dbType.key;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return v;
+    // }, '  '));
     return sequelize.define(name, attrs, {
         tableName: name,
         timestamps: true,

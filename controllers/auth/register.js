@@ -13,10 +13,6 @@ var register = async(ctx, next) => {
 
     let body = ctx.request.body;
 
-    let find_one = await model.User.findOne({
-            email: '123@123.com'
-    });
-    console.log(find_one);
     let find_user = await model.User.findAll({
         where: {
             email: body.email

@@ -1,7 +1,7 @@
 const passport = require('koa-passport');
 
 var index = async(ctx, next) => {
-    await ctx.render('auth/login.html', {
+    await ctx.render('auth/login.html', {   
         error_msg: '',
         csrf: ctx.csrf
     });
@@ -16,8 +16,8 @@ var login = async(ctx, next) => {
                 csrf: ctx.csrf
             });
         } else {
-            await ctx.redirect('/');
             await ctx.login(user);
+            await ctx.redirect('/');
         }
     })
     await middleware.call(this, ctx, next)
