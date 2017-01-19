@@ -37,17 +37,27 @@ app.keys = ['secret111'];
 app.use(convert(session()));
 
 app.use(new CSRF({
-  invalidSessionSecretMessage: 'Invalid session secret',
-  invalidSessionSecretStatusCode: 403,
-  invalidTokenMessage: 'Invalid CSRF token',
-  invalidTokenStatusCode: 403,
-  excludedMethods: [ 'GET', 'HEAD', 'OPTIONS' ],
-  disableQuery: false
+    invalidSessionSecretMessage: 'Invalid session secret',
+    invalidSessionSecretStatusCode: 403,
+    invalidTokenMessage: 'Invalid CSRF token',
+    invalidTokenStatusCode: 403,
+    excludedMethods: ['GET', 'HEAD', 'OPTIONS'],
+    disableQuery: false
 }));
 
 require('./auth');
 app.use(passport.initialize());
 app.use(passport.session());
+
+// app.use(async(ctx, next) => {
+//     if (ctx.path === '/' || ctx.path === '/login' || ctx.path === '/register' || ctx.isAuthenticated()) {
+//         return await next();
+//     }
+//     await ctx.render('auth/login.html', {
+//         error_msg: '请先登录',
+//         csrf: ctx.csrf
+//     });
+// });
 
 app.use(controller());
 

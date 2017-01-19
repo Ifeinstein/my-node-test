@@ -27,7 +27,7 @@ var register = async(ctx, next) => {
     } else {
         let create_user = await model.User.create({
             email: body.email,
-            password: body.password,
+            password: require('crypto').createHash('sha1').update(body.password).digest('hex'),
             name: body.name || '',
             gender: body.gender || '',
         });

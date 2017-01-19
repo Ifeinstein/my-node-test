@@ -15,7 +15,7 @@ $(document).ready(function() {
         $(this).closest('.input-group, .form-group').removeClass('focus');
     });
 
-    $('.smoove').smoove({ moveY: '500px' });
+    $('.smoove').smoove({ moveY: '300px' });
 
     $(".pinned").pin({
     	containerSelector: '.min-height',

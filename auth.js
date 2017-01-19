@@ -17,8 +17,11 @@ passport.deserializeUser(async function(id, done) {
 })
 
 const LocalStrategy = require('passport-local').Strategy
-passport.use(new LocalStrategy(async function(username, password, done) {
-    let user = await User.findOne({ where: { email: username, password: password } })
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+}, async function(email, password, done) {
+    let user = await User.findOne({ where: { email: email, password: require('crypto').createHash('sha1').update(password).digest('hex') } })
     if (user) {
         done(null, user)
     } else {

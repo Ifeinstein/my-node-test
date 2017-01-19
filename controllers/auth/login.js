@@ -17,7 +17,10 @@ var login = async(ctx, next) => {
             });
         } else {
             await ctx.login(user);
-            await ctx.redirect('/');
+            if(ctx.path === '/login'){
+                 await ctx.redirect('/');
+            }
+            await ctx.redirect('back');
         }
     })
     await middleware.call(this, ctx, next)
